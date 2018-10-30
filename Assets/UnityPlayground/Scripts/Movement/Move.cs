@@ -22,9 +22,17 @@ public class Move : Physics2DObject
 	private float moveHorizontal;
 	private float moveVertical;
 
+    Animator animator;
 
-	// Update gets called every frame
-	void Update ()
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
+
+
+    // Update gets called every frame
+    void Update ()
 	{	
 		// Moving with the arrow keys
 		if(typeOfControl == Enums.KeyGroups.ArrowKeys)
@@ -72,4 +80,24 @@ public class Move : Physics2DObject
 		// Apply the force to the Rigidbody2d
 		rigidbody2D.AddForce(movement * speed * 10f);
 	}
+
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown("left"))
+        {
+            animator.SetTrigger("walkwest");
+        }
+        if (Input.GetKeyDown("right"))
+        {
+            animator.SetTrigger("walkeast");
+        }
+        if (Input.GetKeyDown("up"))
+        {
+            animator.SetTrigger("walknorth");
+        }
+        if (Input.GetKeyDown("down"))
+        {
+            animator.SetTrigger("walksouth");
+        }
+    }
 }

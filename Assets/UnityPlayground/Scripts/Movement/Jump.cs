@@ -22,8 +22,11 @@ public class Jump : Physics2DObject
 
 	private bool canJump = true;
 
-	// Read the input from the player
-	void Update()
+    Animator animator;
+    private void Start() { animator = GetComponentInChildren<Animator>(); }
+
+    // Read the input from the player
+    void Update()
 	{
 		if(canJump
 			&& Input.GetKeyDown(key))
@@ -42,4 +45,10 @@ public class Jump : Physics2DObject
 			canJump = true;
 		}
 	}
+
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown("space"))               //välilyönti - tai muu näppäin
+        { animator.SetTrigger("Hypi"); }
+    }
 }
